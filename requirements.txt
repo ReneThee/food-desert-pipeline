@@ -1,0 +1,13 @@
+pandas
+openpyxl
+requests
+python-dotenv
+geopandas
+shapely
+sqlalchemy
+geoalchemy2
+psycopg2-binary
+streamlit
+folium
+streamlit-folium
+branca
