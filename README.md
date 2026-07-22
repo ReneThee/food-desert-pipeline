@@ -60,6 +60,46 @@ I made the pipeline validate itself on every run:
 - My foreign keys reject any row that references a tract that does not exist.
 - After loading, my automated checks confirm the tract count, zero orphan rows, valid geometries, and that every score falls between 0 and 100.
 
+Reproduce it
+You need Python 3.10 or newer, PostgreSQL with PostGIS, and a free Census API key from api.census.gov/data/key_signup.html (click the activation link in the email, the key does not work without it).
+bash
+git clone https://github.com/ReneThee/food-desert-pipeline.git
+cd food-desert-pipeline
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+
+createdb fooddesert
+psql -d fooddesert -c "CREATE EXTENSION postgis;"
+Create a .env file at the project root:
+text
+CENSUS_API_KEY=your_key_here
+DATABASE_URL=postgresql+psycopg2://your_username@localhost:5432/fooddesert
+Download the two files the pipeline cannot fetch by API:
+The 2019 USDA Food Access Research Atlas Excel file from ers.usda.gov, saved as data/raw/food_access_atlas_2019.xlsx
+The TIGER 2019 tract shapefile: curl -o data/raw/tl_2019_25_tract.zip https://www2.census.gov/geo/tiger/TIGER2019/TRACT/tl_2019_25_tract.zip
+Then pull the ACS data and build everything:
+bash
+python src/extract_acs.py
+python run_pipeline.py
+streamlit run app/streamlit_app.py
+The map opens at localhost:8501. I tested these steps end to end in a fresh clone.
+Project structure
+food-desert-pipeline/
+    run_pipeline.py       one-command rebuild with quality checks
+    requirements.txt
+    src/
+        extract_acs.py    pulls ACS data from the Census API
+        etl.py            transforms and loads all three sources
+        check_geoids.py   three-way GEOID reconciliation
+    sql/
+        schema.sql        tables with foreign key integrity
+        views.sql         composite score and severity tiers
+    app/
+        streamlit_app.py  interactive severity map
+    docs/
+        erd.png           schema diagram
+        map.png           map screenshot
 
 ## What I would build next
 
