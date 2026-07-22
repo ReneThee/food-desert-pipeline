@@ -29,6 +29,9 @@ def load_data() -> gpd.GeoDataFrame:
 
 
 gdf = load_data()
+gdf["tract_name"] = gdf["tract_name"].str.replace(
+    ", Worcester County, Massachusetts", "", regex=False
+)
 
 st.title("Food Access in Worcester County, MA")
 st.caption(
