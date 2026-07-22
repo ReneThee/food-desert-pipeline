@@ -1,6 +1,6 @@
 # Food Desert Mapping Pipeline: Worcester County, MA
 
-I built an end-to-end data pipeline that measures food access for every census tract in Worcester County, Massachusetts. My pipeline pulls raw data from three federal sources, loads it into PostgreSQL with PostGIS, computes a transparent food-access score in SQL, and serves the results on an interactive map. I can rebuild everything from raw data with one command.
+I built an end-to-end data pipeline that measures food access for every census tract in Worcester County, Massachusetts. My pipeline pulls raw data from three federal sources, loads it into PostgreSQL with PostGIS, computes a transparent food-access score in SQL, and serves the results on an interactive map.
 
 ![Food access severity map of Worcester County](docs/map.png)
 
