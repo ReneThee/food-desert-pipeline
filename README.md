@@ -30,7 +30,7 @@ My database design:
 
 ![Schema diagram](docs/erd.png)
 
-I made the `tracts` table the spine, one row per tract with the PostGIS geometry. The `demographics` table (from the ACS) and the `food_access` table (from the USDA) hang off it with one-to-one foreign keys. I split them by source so I can reload either one without touching the other.
+I made the tracts table the spine, one row per tract with the PostGIS geometry. The demographics table (from the ACS) and the food_access table (from the USDA) hang off it with one-to-one foreign keys. I split them by source so I can reload either one without touching the other.
 
 ## My composite score
 
