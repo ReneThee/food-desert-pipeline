@@ -6,7 +6,7 @@ I built an end-to-end data pipeline that measures food access for every census t
 
 ## Why I built this
 
-A food desert is an area where residents have limited access to affordable, healthy food. The USDA publishes an official flag for these areas, but the flag is a yes/no answer. I wanted a score with degrees, built from logic I could defend, for the county I live in. Worcester County has 172 census tracts and more than 860,000 residents, and I score every one of them.
+A food desert is an area where residents have limited access to affordable, healthy food. The USDA publishes an official flag for these areas, but the flag is a yes/no answer. I wanted a score built from logic I could defend, for the county I live in. Worcester County has 172 census tracts and more than 860,000 residents, and I score every one of them.
 
 ## Key results
 
