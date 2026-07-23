@@ -20,7 +20,7 @@ A food desert is an area where residents have limited access to affordable, heal
 raw data  ->  pandas transform  ->  Postgres/PostGIS  ->  SQL views  ->  Streamlit
 ```
 
-- **Raw data:** I use the USDA Food Access Research Atlas (Excel), the Census ACS 5-Year (REST API), and TIGER/Line shapefiles, stored untouched in `data/raw`.
+- **Raw data:** I use the USDA Food Access Research Atlas (Excel), the Census ACS 5-Year (REST API), and TIGER/Line shapefiles, stored untouched in data/raw.
 - **Pandas transform:** I standardize GEOID join keys as strings, handle missing values and API sentinel codes, and reconcile the same set of tracts across all three sources before anything loads.
 - **Postgres/PostGIS:** I load three base tables behind a foreign-key-enforced schema. My loads are idempotent: the pipeline truncates and reloads inside a transaction, so running it twice produces identical results.
 - **SQL views:** I compute the composite score and severity tiers in views, not tables. When I change a weight, it is a one-line edit and the results recompute instantly.
@@ -90,23 +90,6 @@ streamlit run app/streamlit_app.py
 
 The map opens at localhost:8501. I tested these steps end to end in a fresh clone.
 
-## Project structure
-
-food-desert-pipeline/
-    run_pipeline.py       one-command rebuild with quality checks
-    requirements.txt
-    src/
-        extract_acs.py    pulls ACS data from the Census API
-        etl.py            transforms and loads all three sources
-        check_geoids.py   three-way GEOID reconciliation
-    sql/
-        schema.sql        tables with foreign key integrity
-        views.sql         composite score and severity tiers
-    app/
-        streamlit_app.py  interactive severity map
-    docs/
-        erd.png           schema diagram
-        map.png           map screenshot
 
 ## What I would build next
 
